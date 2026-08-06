@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malu Ixel Coffee House | Latin-Roots Cafe in Magna, UT</title>
+<meta name="description" content="Malu Ixel Coffee House — a Latin-roots cafe in Magna, Utah serving handcrafted coffee, breakfast, lunch, bakery and more. Rated 4.9 stars from 66 reviews. Call (385) 601-6261.">
+<meta name="keywords" content="Magna Utah cafe, Latin coffee shop, coffee house Magna UT, chilaquiles, tres leches, breakfast burrito, Malu Ixel">
+
+<!-- Google Fonts: Playfair Display (headings), Lato (body), Great Vibes (script logo) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Lato:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+
+<style>
+  /* ============================================================
+     1. DESIGN TOKENS — warm terracotta / espresso / mustard cafe palette
+     ============================================================ */
+  :root{
+    --terracotta:#D4894A;
+    --terracotta-deep:#B96E36;
+    --espresso:#3D2B1F;
+    --espresso-light:#5A4433;
+    --mustard:#D4A42A;
+    --mustard-light:#E8C463;
+    --cream:#FDF6F0;
+    --cream-alt:#F5EBE0;
+    --text:#2D1B0E;
+    --line: rgba(61,43,31,0.14);
+
+    --font-heading:'Playfair Display', serif;
+    --font-body:'Lato', sans-serif;
+    --font-script:'Great Vibes', cursive;
+
+    --ease: cubic-bezier(.22,.68,0,1);
+    --radius: 18px;
+  }
+
+  /* ============================================================
+     2. RESET & BASE
+     ============================================================ */
+  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--cream);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  button{ font:inherit; cursor:pointer; border:none; background:none; }
+  h1,h2,h3{ font-family:var(--font-heading); font-weight:600; color:var(--espresso); }
+  input,textarea{ font:inherit; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--terracotta-deep); outline-offset:3px; border-radius:4px;
+  }
+
+  .container{ width:100%; max-width:1180px; margin-inline:auto; padding-inline:24px; }
+  section{ padding:100px 0; position:relative; }
+  .eyebrow{ font-size:13px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--terracotta-deep); }
+  .section-title{ font-size:clamp(30px,4vw,46px); margin-top:10px; }
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 54px; }
+  .section-head p.lede{ margin-top:14px; color:#6b5645; }
+
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .75s var(--ease), transform .75s var(--ease); }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+  .stagger.in-view{ transition-delay:calc(var(--i,0) * 90ms); }
+
+  .glow{ text-shadow:0 0 20px rgba(212,164,42,.5), 0 0 44px rgba(212,164,42,.22); }
+
+  /* ============================================================
+     3. BUTTONS
+     ============================================================ */
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 30px; border-radius:999px;
+    font-size:14px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease);
+  }
+  .btn:hover{ transform:scale(1.05); }
+  .btn-primary{ background:linear-gradient(135deg, var(--terracotta), var(--terracotta-deep)); color:#fff; box-shadow:0 12px 26px -10px rgba(212,137,74,.6); }
+  .btn-primary.pulse{ animation:pulse-btn 2.4s ease-in-out infinite; }
+  @keyframes pulse-btn{
+    0%,100%{ box-shadow:0 12px 26px -10px rgba(212,137,74,.6); }
+    50%{ box-shadow:0 12px 34px -6px rgba(212,164,42,.8); }
+  }
+  .btn-secondary{ background:rgba(255,255,255,.15); border:1.5px solid rgba(255,255,255,.7); color:#fff; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+  .btn-secondary:hover{ background:rgba(255,255,255,.28); }
+  .btn-mustard{ background:linear-gradient(135deg, var(--mustard), var(--mustard-light)); color:var(--espresso); box-shadow:0 10px 22px -10px rgba(212,164,42,.7); }
+  .btn-outline{ border:1.5px solid var(--terracotta-deep); color:var(--terracotta-deep); }
+  .btn-outline:hover{ background:var(--terracotta-deep); color:#fff; }
+  .btn-sm{ padding:8px 18px; font-size:11.5px; }
+  .btn-block{ width:100%; justify-content:center; }
+
+  /* ============================================================
+     4. NAV — glassmorphism sticky
+     ============================================================ */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    padding:18px 0;
+    background:rgba(61,43,31,0.15);
+    backdrop-filter:blur(14px) saturate(160%); -webkit-backdrop-filter:blur(14px) saturate(160%);
+    border-bottom:1px solid rgba(255,255,255,.12);
+    transition:background .4s var(--ease), padding .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .nav.scrolled{
+    padding:12px 0;
+    background:rgba(253,246,240,0.88);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 10px 30px -18px rgba(45,27,14,.3);
+  }
+  .nav-row{ display:flex; align-items:center; justify-content:space-between; gap:20px; }
+  .logo{ display:flex; align-items:center; gap:10px; font-family:var(--font-script); font-size:30px; color:#fff; transition:color .4s var(--ease); }
+  .nav.scrolled .logo{ color:var(--espresso); }
+  .nav-links{ display:flex; align-items:center; gap:30px; }
+  .nav-links a{ font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#fff; position:relative; padding-bottom:4px; transition:color .4s var(--ease); }
+  .nav.scrolled .nav-links a{ color:var(--text); }
+  .nav-links a::after{ content:""; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--mustard); transition:width .3s var(--ease); }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-toggle{ display:none; width:42px; height:42px; border-radius:50%; border:1.5px solid rgba(255,255,255,.6); align-items:center; justify-content:center; flex-direction:column; gap:5px; }
+  .nav.scrolled .nav-toggle{ border-color:var(--line); }
+  .nav-toggle span{ width:18px; height:2px; background:#fff; transition:all .3s var(--ease); }
+  .nav.scrolled .nav-toggle span{ background:var(--espresso); }
+  .nav-toggle.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2){ opacity:0; }
+  .nav-toggle.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu{
+    display:none; position:fixed; top:0; right:0; bottom:0; width:min(80vw,320px); z-index:199;
+    background:rgba(253,246,240,0.96); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+    padding:110px 34px 40px; transform:translateX(100%); transition:transform .5s var(--ease);
+    box-shadow:-10px 0 40px rgba(0,0,0,.15);
+  }
+  .mobile-menu.open{ transform:translateX(0); }
+  .mobile-menu a{ display:block; font-family:var(--font-heading); font-size:22px; padding:13px 0; border-bottom:1px solid var(--line); color:var(--espresso); }
+
+  /* ============================================================
+     5. HERO — full screen bg + steam animation + animated text
+     ============================================================ */
+  .hero{ height:100vh; min-height:640px; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; }
+  .hero-bg{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(180deg, rgba(30,18,10,.6), rgba(30,18,10,.8)),
+      url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1600&q=80');
+    background-size:cover; background-position:center;
+    background-attachment:fixed;
+  }
+  @media (max-width:900px){ .hero-bg{ background-attachment:scroll; } }
+
+  .steam{ position:absolute; z-index:1; bottom:52%; left:50%; width:120px; height:200px; transform:translateX(-50%); pointer-events:none; opacity:.5; }
+  .steam span{
+    position:absolute; bottom:0; width:10px; height:60px; border-radius:50%;
+    background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,0));
+    filter:blur(4px);
+    animation:steam-rise 3.6s ease-in infinite;
+  }
+  .steam span:nth-child(1){ left:20px; animation-delay:0s; }
+  .steam span:nth-child(2){ left:55px; animation-delay:1s; }
+  .steam span:nth-child(3){ left:90px; animation-delay:2s; }
+  @keyframes steam-rise{
+    0%{ transform:translateY(0) scaleX(1); opacity:0; }
+    20%{ opacity:.6; }
+    100%{ transform:translateY(-140px) scaleX(1.6); opacity:0; }
+  }
+
+  .hero-content{ position:relative; z-index:2; color:#fff; max-width:760px; padding-inline:24px; }
+  .hero-content .eyebrow{ color:var(--mustard-light); }
+  .hero-title{
+    font-family:var(--font-heading); font-weight:700; font-size:clamp(40px,7.4vw,78px); margin-top:14px;
+    background:linear-gradient(90deg, var(--mustard-light), #fff, var(--terracotta), var(--mustard-light));
+    background-size:300% auto; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    animation:shine 6s linear infinite;
+  }
+  @keyframes shine{ to{ background-position:300% center; } }
+  .hero-tagline{ font-size:18px; font-weight:300; margin-top:16px; color:rgba(255,255,255,.92); font-style:italic; }
+  .hero-rating{
+    margin-top:24px; display:inline-flex; align-items:center; gap:10px; padding:10px 20px; border-radius:999px;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.35);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); font-size:14px; font-weight:700;
+  }
+  .hero-rating .stars{ color:var(--mustard-light); letter-spacing:2px; }
+  .hero-actions{ margin-top:36px; display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
+  .scroll-cue{ position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:2; color:rgba(255,255,255,.8); font-size:22px; animation:bounce 2.2s ease-in-out infinite; }
+  @keyframes bounce{ 0%,100%{ transform:translate(-50%,0);} 50%{ transform:translate(-50%,10px);} }
+
+  /* ============================================================
+     6. MENU — tabbed categories, JS-rendered items
+     ============================================================ */
+  .menu{ background:var(--cream-alt); }
+  .menu-tabs{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:44px; }
+  .menu-tab{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:999px;
+    background:#fff; border:1px solid var(--line);
+    font-size:13.5px; font-weight:700;
+    transition:all .35s var(--ease);
+  }
+  .menu-tab:hover{ border-color:var(--terracotta); }
+  .menu-tab.active{ background:var(--espresso); color:var(--cream); border-color:var(--espresso); }
+
+  .menu-panel{ max-width:840px; margin-inline:auto; }
+  .menu-row{
+    display:grid; grid-template-columns:auto 1fr auto auto; align-items:baseline; gap:14px;
+    padding:22px 8px; border-bottom:1px solid var(--line);
+  }
+  .menu-row-name{ font-family:var(--font-heading); font-size:19px; font-weight:600; grid-column:1; }
+  .menu-row-desc{ grid-column:1 / -1; order:3; font-size:14px; color:#6b5645; margin-top:4px; }
+  .menu-row-leader{ grid-column:2; border-bottom:2px dotted var(--line); position:relative; top:-6px; min-width:20px; }
+  .menu-row-price{ grid-column:3; font-weight:700; color:var(--terracotta-deep); white-space:nowrap; font-size:15px; }
+  .menu-row-order{ grid-column:4; }
+
+  /* ============================================================
+     7. GALLERY
+     ============================================================ */
+  .gallery-grid{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:210px; gap:16px; }
+  .gallery-item{ position:relative; overflow:hidden; border-radius:14px; }
+  .gallery-item img{ width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
+  .gallery-item:hover img{ transform:scale(1.12); }
+  .gallery-overlay{
+    position:absolute; inset:0; background:linear-gradient(180deg, rgba(212,164,42,.05), rgba(61,43,31,.6));
+    opacity:0; transition:opacity .45s var(--ease); display:flex; align-items:flex-end; padding:18px;
+  }
+  .gallery-item:hover .gallery-overlay{ opacity:1; }
+  .gallery-overlay span{ color:#fff; font-family:var(--font-heading); font-size:16px; }
+  .gallery-item.tall{ grid-row:span 2; }
+
+  /* ============================================================
+     8. ABOUT
+     ============================================================ */
+  .about-grid{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:60px; align-items:center; }
+  .about-img-wrap{ position:relative; border-radius:var(--radius); overflow:hidden; box-shadow:0 30px 60px -30px rgba(61,43,31,.4); }
+  .about-img-wrap img{ transition:transform .6s var(--ease); }
+  .about-img-wrap:hover img{ transform:scale(1.06); }
+  .about-badge{
+    position:absolute; bottom:18px; left:18px; background:rgba(255,255,255,.88);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border-radius:14px; padding:14px 20px; text-align:center; box-shadow:0 14px 30px -14px rgba(0,0,0,.25);
+  }
+  .about-badge strong{ display:block; font-family:var(--font-heading); font-size:22px; color:var(--terracotta-deep); }
+  .about-badge span{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#777; }
+  .about-copy p{ color:#6b5645; margin-top:14px; }
+  .about-contact{ margin-top:28px; display:flex; flex-direction:column; gap:16px; }
+  .about-contact li{ display:flex; align-items:flex-start; gap:14px; }
+  .about-contact .icon-circle{
+    width:42px; height:42px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, var(--mustard-light), var(--terracotta)); color:#fff; font-size:16px;
+  }
+
+  /* ============================================================
+     9. REVIEWS
+     ============================================================ */
+  .review-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+  .review-card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:26px 22px; transition:transform .4s var(--ease), box-shadow .4s var(--ease); }
+  .review-card:hover{ transform:translateY(-8px); box-shadow:0 24px 40px -22px rgba(61,43,31,.28); }
+  .review-card .stars{ color:var(--mustard); letter-spacing:2px; font-size:14px; }
+  .review-card p{ font-family:var(--font-heading); font-style:italic; font-size:15px; margin-top:12px; }
+  .review-name{ margin-top:14px; font-size:13px; font-weight:700; color:var(--terracotta-deep); }
+  .counter-strip{ margin-top:64px; text-align:center; }
+  .counter-strip strong{ font-family:var(--font-heading); font-size:clamp(46px,6vw,60px); color:var(--terracotta-deep); }
+  .counter-strip span{ display:block; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:#777; margin-top:6px; }
+
+  /* ============================================================
+     10. CONTACT / HOURS
+     ============================================================ */
+  .contact{ background:linear-gradient(160deg, var(--espresso), #2A1C12); color:#fff; }
+  .contact .eyebrow{ color:var(--mustard-light); }
+  .contact .section-title{ color:#fff; }
+  .contact-grid{ display:grid; grid-template-columns:1fr 1.1fr; gap:56px; margin-top:16px; }
+
+  .hours-card{ display:flex; flex-direction:column; gap:22px; }
+  .info-card{
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); border-radius:var(--radius);
+    padding:22px; display:flex; gap:16px; align-items:flex-start;
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  }
+  .info-card i, .info-card .ic{ font-size:20px; color:var(--mustard-light); }
+  .info-card strong{ display:block; font-family:var(--font-heading); font-size:16px; margin-bottom:4px; }
+  .info-card span{ font-size:14px; color:rgba(255,255,255,.78); line-height:1.7; }
+
+  .contact-form{
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); border-radius:var(--radius);
+    padding:36px; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin-bottom:8px; color:rgba(255,255,255,.8); }
+  .field input, .field textarea{
+    width:100%; padding:13px 16px; border-radius:10px;
+    background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); color:#fff;
+    transition:border-color .3s var(--ease), background .3s var(--ease);
+  }
+  .field input::placeholder, .field textarea::placeholder{ color:rgba(255,255,255,.5); }
+  .field input:focus, .field textarea:focus{ border-color:var(--mustard-light); background:rgba(255,255,255,.16); outline:none; }
+  .field.error input, .field.error textarea{ border-color:#e88; }
+  .error-msg{ font-size:12px; color:#ffb3b3; margin-top:6px; display:none; }
+  .field.error .error-msg{ display:block; }
+  .form-status{ margin-top:14px; font-size:14px; display:none; }
+  .form-status.show{ display:block; }
+
+  /* ============================================================
+     11. FOOTER
+     ============================================================ */
+  footer{ background:#20140C; color:rgba(255,255,255,.7); padding:56px 0 28px; }
+  .footer-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:40px; padding-bottom:34px; border-bottom:1px solid rgba(255,255,255,.1); }
+  .footer-logo{ display:flex; align-items:center; gap:10px; font-family:var(--font-script); font-size:30px; color:#fff; }
+  .footer-grid p{ font-size:13.5px; margin-top:14px; color:rgba(255,255,255,.55); max-width:280px; }
+  .footer-col h4{ font-family:var(--font-heading); font-size:15px; color:#fff; margin-bottom:14px; }
+  .footer-col a{ display:block; font-size:13.5px; padding:5px 0; color:rgba(255,255,255,.6); transition:color .3s var(--ease); }
+  .footer-col a:hover{ color:var(--mustard-light); }
+  .social-row{ display:flex; gap:12px; margin-top:16px; }
+  .social-row a{ width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; font-size:14px; transition:all .3s var(--ease); }
+  .social-row a:hover{ background:var(--mustard); border-color:var(--mustard); color:#20140C; transform:translateY(-3px); }
+  .footer-bottom{ text-align:center; padding-top:22px; font-size:12.5px; color:rgba(255,255,255,.4); }
+
+  /* ============================================================
+     12. FLOATING BUTTONS
+     ============================================================ */
+  .float-btns{ position:fixed; right:22px; bottom:22px; z-index:150; display:flex; flex-direction:column; gap:14px; align-items:center; }
+  .fab{ width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; color:#fff; box-shadow:0 14px 28px -12px rgba(0,0,0,.4); transition:transform .35s var(--ease), opacity .35s var(--ease); }
+  .fab-call{ background:linear-gradient(135deg, var(--terracotta), var(--terracotta-deep)); animation:pulse-btn 2.6s ease-in-out infinite; }
+  .fab-call:hover{ transform:scale(1.08); }
+  .fab-top{ background:rgba(61,43,31,.9); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); opacity:0; pointer-events:none; transform:translateY(10px); }
+  .fab-top.visible{ opacity:1; pointer-events:auto; transform:translateY(0); }
+  .fab-top:hover{ transform:translateY(-3px); }
+
+  /* ============================================================
+     13. RESPONSIVE
+     ============================================================ */
+  @media (max-width:980px){
+    .gallery-grid{ grid-template-columns:repeat(3,1fr); }
+    .about-grid{ grid-template-columns:1fr; }
+    .review-grid{ grid-template-columns:repeat(2,1fr); }
+    .contact-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:760px){
+    .nav-links{ display:none; }
+    .nav-toggle{ display:flex; }
+    .mobile-menu{ display:block; }
+    section{ padding:70px 0; }
+    .gallery-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:160px; }
+    .review-grid{ grid-template-columns:1fr; }
+    .form-row{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; }
+    .hero-actions{ flex-direction:column; align-items:center; }
+    .menu-row{ grid-template-columns:1fr auto; }
+    .menu-row-leader{ display:none; }
+    .menu-row-order{ grid-column:1 / -1; margin-top:8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<header class="nav" id="nav">
+  <div class="container nav-row">
+    <a href="#home" class="logo">☕ Malu Ixel</a>
+
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div style="display:flex; align-items:center; gap:16px;">
+      <a href="tel:+13856016261" class="btn btn-mustard btn-sm" id="navOrder" style="display:none">Order Now</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">Home</a>
+  <a href="#menu">Menu</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <a href="tel:+13856016261">Order Now</a>
+</div>
+
+<main>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" id="home">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="steam" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="hero-content">
+      <p class="eyebrow">Latin Roots · Fresh Flavors</p>
+      <h1 class="hero-title glow">Malu Ixel Coffee House</h1>
+      <p class="hero-tagline">"Latin Roots. Fresh Flavors. Coffee Done Right."</p>
+
+      <div class="hero-rating">
+        <span class="stars">★★★★★</span>
+        <span>4.9 <span style="font-weight:400; color:rgba(255,255,255,.75);">(66 Reviews)</span></span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary pulse">View Menu</a>
+        <a href="tel:+13856016261" class="btn btn-secondary">Order Now</a>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>↓</span></div>
+  </section>
+
+  <!-- ============================================================
+       MENU — tabbed, JS-rendered from the data array below
+       ============================================================ -->
+  <section class="menu" id="menu">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Fresh Daily</p>
+        <h2 class="section-title">Our Menu</h2>
+        <p class="lede">Handcrafted coffee, Latin-inspired plates, and bakery favorites — pick a category to browse.</p>
+      </div>
+
+      <div class="menu-tabs" id="menuTabs" role="tablist" aria-label="Menu categories"></div>
+      <div class="menu-panel" id="menuPanel"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GALLERY
+       ============================================================ -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">A Peek Inside</p>
+        <h2 class="section-title">Our Gallery</h2>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item tall reveal stagger" style="--i:0">
+          <img src="https://picsum.photos/seed/malucafe1/600/900" alt="Cafe interior seating area" loading="lazy">
+          <div class="gallery-overlay"><span>Cozy Interior</span></div>
+        </div>
+        <div class="gallery-item reveal stagger" style="--i:1">
+          <img src="https://picsum.photos/seed/malucafe2/600/440" alt="Latte art" loading="lazy">
+          <div class="gallery-overlay"><span>Latte Art</span></div>
+        </div>
+        <div class="gallery-item reveal stagger" style="--i:2">
+          <img src="https://picsum.photos/seed/malucafe3/600/440" alt="Chilaquiles plate" loading="lazy">
+          <div class="gallery-overlay"><span>Chilaquiles</span></div>
+        </div>
+        <div class="gallery-item tall reveal stagger" style="--i:3">
+          <img src="https://picsum.photos/seed/malucafe4/600/900" alt="Tres leches cake slice" loading="lazy">
+          <div class="gallery-overlay"><span>Tres Leches</span></div>
+        </div>
+        <div class="gallery-item reveal stagger" style="--i:4">
+          <img src="https://picsum.photos/seed/malucafe5/600/440" alt="Espresso bar" loading="lazy">
+          <div class="gallery-overlay"><span>Espresso Bar</span></div>
+        </div>
+        <div class="gallery-item reveal stagger" style="--i:5">
+          <img src="https://picsum.photos/seed/malucafe6/600/440" alt="Fresh pastry case" loading="lazy">
+          <div class="gallery-overlay"><span>Bakery Case</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+       ============================================================ -->
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div class="about-img-wrap reveal">
+        <img src="https://picsum.photos/seed/maluabout/700/560" alt="Malu Ixel Coffee House team">
+        <div class="about-badge">
+          <strong>4.9★</strong>
+          <span>66 Reviews</span>
+        </div>
+      </div>
+
+      <div class="about-copy reveal reveal-delay-1">
+        <p class="eyebrow">Our Story</p>
+        <h2 class="section-title">About Malu Ixel</h2>
+        <p>Welcome to Malu Ixel Coffee House — where Latin roots meet fresh flavors. Located in the heart of Magna, Utah, we're a cozy cafe dedicated to serving exceptional coffee, homemade Latin-inspired dishes, and warm hospitality.</p>
+        <p>From our handcrafted espresso drinks to our chilaquiles and tres leches cake, every item is made with love and authenticity. Come for the coffee, stay for the community.</p>
+
+        <ul class="about-contact">
+          <li><span class="icon-circle">📍</span><span>8585 W Magna Main St Unit 2, Magna, UT 84044</span></li>
+          <li><span class="icon-circle">📞</span><span>+1 385-601-6261</span></li>
+          <li><span class="icon-circle">🕐</span><span>Mon–Sat: 7:00 AM – 6:00 PM · Sun: 8:00 AM – 4:00 PM</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       REVIEWS
+       ============================================================ -->
+  <section class="reviews">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Guest Love</p>
+        <h2 class="section-title">What Our Guests Say</h2>
+      </div>
+
+      <div class="review-grid">
+        <div class="review-card reveal stagger" style="--i:0">
+          <span class="stars">★★★★★</span>
+          <p>"The chilaquiles are better than my abuela's — and the horchata latte is unreal."</p>
+          <div class="review-name">— Daniela P.</div>
+        </div>
+        <div class="review-card reveal stagger" style="--i:1">
+          <span class="stars">★★★★★</span>
+          <p>"Cozy spot, genuinely warm staff, and the tres leches cake alone is worth the drive."</p>
+          <div class="review-name">— Marcus T.</div>
+        </div>
+        <div class="review-card reveal stagger" style="--i:2">
+          <span class="stars">★★★★★</span>
+          <p>"Best cold brew in Magna, hands down. My weekend routine now starts here."</p>
+          <div class="review-name">— Priya S.</div>
+        </div>
+        <div class="review-card reveal stagger" style="--i:3">
+          <span class="stars">★★★★★</span>
+          <p>"Ordered the breakfast burrito on a whim — now it's the only thing I get."</p>
+          <div class="review-name">— Jorge A.</div>
+        </div>
+      </div>
+
+      <div class="counter-strip reveal">
+        <strong data-count-to="66">0</strong>
+        <span>Happy Guests &amp; Counting</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT / HOURS
+       ============================================================ -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Come Say Hi</p>
+        <h2 class="section-title">Visit Us</h2>
+      </div>
+
+      <div class="contact-grid">
+
+        <div class="hours-card">
+          <div class="info-card reveal reveal-delay-1">
+            <span class="ic">📍</span>
+            <div><strong>Address</strong><span>8585 W Magna Main St Unit 2,<br>Magna, UT 84044</span></div>
+          </div>
+          <div class="info-card reveal reveal-delay-1">
+            <span class="ic">📞</span>
+            <div><strong>Phone</strong><span>+1 385-601-6261</span></div>
+          </div>
+          <div class="info-card reveal reveal-delay-2">
+            <span class="ic">🕐</span>
+            <div><strong>Hours</strong><span>Mon–Sat: 7:00 AM – 6:00 PM<br>Sunday: 8:00 AM – 4:00 PM</span></div>
+          </div>
+          <div class="info-card reveal reveal-delay-2">
+            <a href="https://www.google.com/maps/place/8585+W+Magna+Main+St+Unit+2,+Magna,+UT+84044" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="border-color:rgba(255,255,255,.4); color:#fff;">Get Directions</a>
+          </div>
+        </div>
+
+        <form class="contact-form reveal reveal-delay-1" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="field" id="field-name">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required>
+              <span class="error-msg">Please enter your name.</span>
+            </div>
+            <div class="field" id="field-phone">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="(385) XXX-XXXX" required>
+              <span class="error-msg">Please enter a valid phone number.</span>
+            </div>
+          </div>
+
+          <div class="field" id="field-email">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            <span class="error-msg">Please enter a valid email address.</span>
+          </div>
+
+          <div class="field" id="field-message">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Catering request, feedback, or just say hi..." required></textarea>
+            <span class="error-msg">Please enter a message.</span>
+          </div>
+
+          <button type="submit" class="btn btn-mustard btn-block">Send Message</button>
+          <p class="form-status" id="formStatus"></p>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">☕ Malu Ixel</div>
+        <p>Latin roots, fresh flavors, coffee done right — a cozy cafe in the heart of Magna, Utah.</p>
+        <div class="social-row">
+          <a href="https://instagram.com/maluixelcoffee" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          <a href="https://facebook.com/maluixelcoffee" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+          <a href="https://tiktok.com/@maluixelcoffee" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+13856016261">(385) 601-6261</a>
+        <a href="https://www.google.com/maps/place/8585+W+Magna+Main+St+Unit+2,+Magna,+UT+84044" target="_blank" rel="noopener">8585 W Magna Main St Unit 2</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">© <span id="year"></span> Malu Ixel Coffee House. All Rights Reserved.</div>
+  </div>
+</footer>
+
+<!-- Floating action buttons -->
+<div class="float-btns">
+  <a href="#top" class="fab fab-top" id="backToTop" aria-label="Back to top">↑</a>
+  <a href="tel:+13856016261" class="fab fab-call" aria-label="Call to order">📞</a>
+</div>
+
+<script>
+/* ============================================================
+   VANILLA JS
+   ============================================================ */
+(function(){
+  'use strict';
+
+  /* ---- 1. MENU DATA — single source of truth, rendered into tabs below ---- */
+  const MENU = {
+    coffee: {
+      label: '☕ Coffee & Drinks',
+      items: [
+        { name:'Drip Coffee', desc:'Regular or decaf, brewed fresh all day.', price:'$3.25 – $4.75' },
+        { name:'Americano', desc:'Espresso, hot water, simple and strong.', price:'$3.75 – $5.00' },
+        { name:'Latte', desc:'Espresso with silky steamed milk.', price:'$4.25 – $5.75' },
+        { name:'Cappuccino', desc:'Espresso, steamed milk, deep foam.', price:'$4.25 – $5.75' },
+        { name:'Mocha', desc:'Espresso, chocolate, steamed milk.', price:'$4.75 – $6.25' },
+        { name:'White Mocha', desc:'Espresso with white chocolate and milk.', price:'$4.75 – $6.25' },
+        { name:'Caramel Latte', desc:'Espresso, caramel, steamed milk.', price:'$4.75 – $6.25' },
+        { name:'Vanilla Latte', desc:'Espresso, house vanilla, steamed milk.', price:'$4.75 – $6.25' },
+        { name:'Hazelnut Latte', desc:'Espresso, hazelnut, steamed milk.', price:'$4.75 – $6.25' },
+        { name:'Chai Latte', desc:'Spiced black tea concentrate with milk.', price:'$4.50 – $6.00' },
+        { name:'Matcha Latte', desc:'Ceremonial-grade matcha, steamed milk.', price:'$4.75 – $6.25' },
+        { name:'Hot Chocolate', desc:'Rich cocoa, steamed milk, whip on top.', price:'$3.75 – $5.00' },
+        { name:'Mexican Mocha', desc:'Mocha with cinnamon and a hint of chili.', price:'$5.25 – $6.75' },
+        { name:'Dirty Chai', desc:'Chai latte with a shot of espresso.', price:'$5.25 – $6.75' },
+        { name:'Cold Brew', desc:'Steeped 18 hours for a smooth, bold cup.', price:'$4.25 – $5.75' },
+        { name:'Iced Latte', desc:'Espresso and cold milk over ice.', price:'$4.75 – $6.25' },
+        { name:'Iced Mocha', desc:'Chocolate, espresso and milk over ice.', price:'$5.25 – $6.75' },
+        { name:'Frappe', desc:'Blended iced coffee — mocha, vanilla or caramel.', price:'$5.25 – $6.75' },
+        { name:'Smoothie', desc:'Strawberry, mango or mixed berry, blended fresh.', price:'$5.50 – $7.00' },
+        { name:'Fresh Juice', desc:'Orange, carrot or apple, pressed to order.', price:'$4.50 – $6.00' }
+      ]
+    },
+    breakfast: {
+      label: '🍳 Breakfast',
+      items: [
+        { name:'Breakfast Burrito', desc:'Eggs, cheese, potatoes and your choice of bacon, sausage or chorizo.', price:'$8.99' },
+        { name:'Breakfast Sandwich', desc:'Egg and cheese with bacon or sausage, on croissant or bagel.', price:'$7.99' },
+        { name:'Avocado Toast', desc:'Smashed avocado on toasted sourdough.', price:'$7.50' },
+        { name:'Chilaquiles', desc:'Crispy tortillas in red or green salsa, eggs, cheese and beans.', price:'$11.99' },
+        { name:'Huevos Rancheros', desc:'Fried eggs over tortillas with ranchero sauce and beans.', price:'$11.50' },
+        { name:'Oatmeal', desc:'Warm oats with your choice of toppings.', price:'$5.50' },
+        { name:'Yogurt & Granola', desc:'House granola, fresh fruit, honey.', price:'$6.50' },
+        { name:'Pancakes (3)', desc:'Fluffy stack served with butter and syrup.', price:'$8.50' },
+        { name:'French Toast', desc:'Thick-cut brioche, cinnamon, maple syrup.', price:'$8.50' }
+      ]
+    },
+    lunch: {
+      label: '🥗 Lunch',
+      items: [
+        { name:'Sandwich', desc:'Turkey, ham, tuna or veggie, served with chips.', price:'$7.75 – $9.75' },
+        { name:'Panini', desc:'Grilled chicken, pesto or caprese, pressed hot.', price:'$8.75 – $10.75' },
+        { name:'Wrap', desc:'Chicken caesar, veggie or buffalo chicken.', price:'$8.25 – $10.25' },
+        { name:'Salad', desc:'Garden, caesar or grilled chicken.', price:'$6.50 – $9.50' },
+        { name:'Soup of the Day', desc:'Ask your barista what\u2019s simmering today.', price:'$5.25 – $7.25' },
+        { name:'Quesadilla', desc:'Cheese, chicken or veggie, grilled to order.', price:'$7.50 – $9.50' },
+        { name:'Tacos (3)', desc:'Chicken, beef, fish or veggie, on corn tortillas.', price:'$9.50 – $11.50' },
+        { name:'Burrito Bowl', desc:'Rice, beans, protein and fresh toppings.', price:'$10.50' }
+      ]
+    },
+    bakery: {
+      label: '🧁 Bakery & Sweets',
+      items: [
+        { name:'Croissant', desc:'Plain, chocolate or almond, baked daily.', price:'$3.25 – $4.25' },
+        { name:'Muffin', desc:'Blueberry, chocolate chip or bran.', price:'$3.25 – $3.75' },
+        { name:'Scone', desc:'Buttery and lightly sweet.', price:'$3.75' },
+        { name:'Danish', desc:'Flaky pastry with fruit or cream filling.', price:'$3.75' },
+        { name:'Bagel with Cream Cheese', desc:'Toasted, served with a generous schmear.', price:'$3.75 – $4.75' },
+        { name:'Cookie', desc:'Fresh-baked, several flavors daily.', price:'$2.25 – $3.25' },
+        { name:'Brownie', desc:'Rich, fudgy, cut thick.', price:'$3.25' },
+        { name:'Cake Slice', desc:'Chocolate, carrot or cheesecake.', price:'$4.50 – $5.50' },
+        { name:'Flan', desc:'Classic Mexican custard with caramel.', price:'$4.50' },
+        { name:'Tres Leches Cake', desc:'Soaked sponge cake, whipped topping.', price:'$5.50' },
+        { name:'Churros', desc:'Cinnamon sugar churros with chocolate sauce.', price:'$5.50' }
+      ]
+    },
+    kids: {
+      label: '👶 Kids Menu',
+      items: [
+        { name:'Kids Breakfast', desc:'Eggs, bacon and toast.', price:'$6.50' },
+        { name:'Kids Pancakes', desc:'A short stack, just for little ones.', price:'$6.50' },
+        { name:'Kids Grilled Cheese', desc:'Classic, served with chips.', price:'$6.50' },
+        { name:'Kids Pasta', desc:'Pasta with butter.', price:'$6.50' }
+      ]
+    }
+  };
+
+  /* ---- 2. Render tabs + panel from MENU data ---- */
+  const tabsEl = document.getElementById('menuTabs');
+  const panelEl = document.getElementById('menuPanel');
+  const categoryKeys = Object.keys(MENU);
+
+  function renderTabs(activeKey){
+    tabsEl.innerHTML = categoryKeys.map(key => `
+      <button class="menu-tab${key === activeKey ? ' active' : ''}" data-key="${key}" role="tab" aria-selected="${key === activeKey}">
+        ${MENU[key].label}
+      </button>
+    `).join('');
+  }
+
+  function renderPanel(key){
+    const items = MENU[key].items;
+    panelEl.innerHTML = items.map((item, i) => `
+      <div class="menu-row reveal stagger in-view" style="--i:${i % 8}">
+        <span class="menu-row-name">${item.name}</span>
+        <span class="menu-row-leader"></span>
+        <span class="menu-row-price">${item.price}</span>
+        <a href="tel:+13856016261" class="btn btn-outline btn-sm menu-row-order">Order</a>
+        <p class="menu-row-desc">${item.desc}</p>
+      </div>
+    `).join('');
+  }
+
+  function selectCategory(key){
+    renderTabs(key);
+    renderPanel(key);
+    tabsEl.querySelectorAll('.menu-tab').forEach(btn => {
+      btn.addEventListener('click', () => selectCategory(btn.getAttribute('data-key')));
+    });
+  }
+
+  selectCategory('coffee');
+
+  /* ---- 3. Sticky nav: frost + colour swap on scroll ---- */
+  const nav = document.getElementById('nav');
+  const navOrder = document.getElementById('navOrder');
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+    if (window.innerWidth > 760) navOrder.style.display = 'inline-flex';
+  };
+  document.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  /* ---- 4. Mobile menu ---- */
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  /* ---- 5. Hero parallax (adds to CSS background-attachment:fixed) ---- */
+  const heroBg = document.getElementById('heroBg');
+  document.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight) heroBg.style.transform = 'translateY(' + (y * 0.15) + 'px)';
+  }, { passive:true });
+
+  /* ---- 6. Fade-in on scroll ---- */
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+
+  /* ---- 7. Counter animation (66+ guests) ---- */
+  const counters = document.querySelectorAll('[data-count-to]');
+  const animateCount = (el) => {
+    const target = parseInt(el.getAttribute('data-count-to'), 10);
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now){
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + (progress >= 1 ? '+' : '');
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  };
+  if ('IntersectionObserver' in window) {
+    const cIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { animateCount(entry.target); cIO.unobserve(entry.target); } });
+    }, { threshold: 0.6 });
+    counters.forEach(el => cIO.observe(el));
+  } else {
+    counters.forEach(el => el.textContent = el.getAttribute('data-count-to') + '+');
+  }
+
+  /* ---- 8. Contact form validation (client-side only, no backend) ---- */
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  const validators = {
+    name: v => v.trim().length > 1,
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+    phone: v => /^[0-9+\s()-]{7,}$/.test(v),
+    message: v => v.trim().length > 3
+  };
+  function setFieldError(fieldId, hasError){
+    const field = document.getElementById('field-' + fieldId);
+    if (field) field.classList.toggle('error', hasError);
+  }
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+    Object.keys(validators).forEach(key => {
+      const el = form.elements[key];
+      const ok = validators[key](el.value);
+      setFieldError(key, !ok);
+      if (!ok) valid = false;
+    });
+    status.classList.remove('show');
+    if (!valid) {
+      status.textContent = 'Please fix the highlighted fields and try again.';
+      status.style.color = '#ffb3b3';
+      status.classList.add('show');
+      return;
+    }
+    // No backend is wired up — connect this to email/CRM to actually receive submissions.
+    status.textContent = 'Thanks for reaching out! We\u2019ll get back to you shortly.';
+    status.style.color = '#cdeccb';
+    status.classList.add('show');
+    form.reset();
+  });
+
+  /* ---- 9. Back-to-top button visibility ---- */
+  const backToTop = document.getElementById('backToTop');
+  document.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 500);
+  }, { passive:true });
+
+  /* ---- 10. Footer year ---- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+})();
+</script>
+
+</body>
+</html>
